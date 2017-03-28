@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.micic.cs330_v04.MainActivity"
-    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    tools:context="com.example.micic.cs330_v04.MainActivity">
 
-    <item android:id="@+id/back"
-        android:title="Main"
-        app:showAsAction="always"/>
+    <item
+        android:id="@+id/back"
+        android:title="Back"
+        app:showAsAction="always" />
 
-    <item android:id="@+id/help"
-        android:text="Broj dva"
-        android:title="Help"
-        app:showAsAction="always"/>
+    <item
+        android:id="@+id/uni"
+        android:title="Uni"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/fit"
+        android:title="FIT"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/fdu"
+        android:title="FDU"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/fam"
+        android:title="FAM"
+        app:showAsAction="always" />
 
 </menu>

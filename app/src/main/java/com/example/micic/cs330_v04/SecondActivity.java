@@ -43,16 +43,39 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        WebView wv = (WebView) findViewById(R.id.webview1);
+        WebSettings webSettings = wv.getSettings();
         switch (id) {
             case R.id.back:
                 Intent back = new Intent(this, MainActivity.class);
                 this.startActivity(back);
+                break;
+            case R.id.uni:
+                webSettings.setBuiltInZoomControls(true);
+                wv.setWebViewClient(new Callback());
+                wv.loadUrl("https://www.metropolitan.ac.rs");
+                break;
+            case R.id.fit:
+                webSettings.setBuiltInZoomControls(true);
+                wv.setWebViewClient(new Callback());
+                wv.loadUrl("http://www.metropolitan.ac.rs/osnovne-studije/fakultet-informacionih-tehnologija/");
+                break;
+            case R.id.fdu:
+                webSettings.setBuiltInZoomControls(true);
+                wv.setWebViewClient(new Callback());
+                wv.loadUrl("http://www.metropolitan.ac.rs/fakultet-digitalnih-umetnosti-2/");
+                break;
+            case R.id.fam:
+                webSettings.setBuiltInZoomControls(true);
+                wv.setWebViewClient(new Callback());
+                wv.loadUrl("http://www.metropolitan.ac.rs/osnovne-studije/fakultet-za-menadzment/");
                 break;
 
 
         }
         return super.onOptionsItemSelected(item);
     }
+
     //---slike za prikazivanje---
     Integer[] imageIDs = {
             R.drawable.pic1,
@@ -69,11 +92,11 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_main);
 
-        WebView wv = (WebView) findViewById(R.id.webview1);
-        WebSettings webSettings = wv.getSettings();
-        webSettings.setBuiltInZoomControls(true);
-        wv.setWebViewClient(new Callback());
-        wv.loadUrl("https://www.metropolitan.ac.rs");
+//        WebView wv = (WebView) findViewById(R.id.webview1);
+//        WebSettings webSettings = wv.getSettings();
+//        webSettings.setBuiltInZoomControls(true);
+//        wv.setWebViewClient(new Callback());
+//        wv.loadUrl("https://www.metropolitan.ac.rs");
 
         Button btn = (Button) findViewById(R.id.btn1);
         btn.setOnCreateContextMenuListener(this);
