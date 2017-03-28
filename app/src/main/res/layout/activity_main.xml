@@ -1,106 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
     android:orientation="vertical">
 
-
-    <Button
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="idiNaDruguAktivnost"
-        android:text="V05"/>
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="btnSaved_clicked"
-        android:text="Save" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnOpen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open" />
 
-    <ImageButton
-        android:id="@+id/btnImg1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="btnSaved_clicked"
+            android:text="Save" />
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <CheckBox
-        android:id="@+id/chkAutosave"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Autosave" />
-
-    <CheckBox
-        android:id="@+id/star"
-        style="?android:attr/buttonStyleToggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Toggle button" />
-
-    <RadioGroup
-        android:id="@+id/rdbGp1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rdb1"
+        <Button
+            android:id="@+id/btnOpen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Option 1" />
+            android:text="Open" />
 
-        <RadioButton
-            android:id="@+id/rdb2"
+        <ImageButton
+            android:id="@+id/btnImg1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/chkAutosave"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Autosave" />
+
+        <CheckBox
+            android:id="@+id/star"
+            style="?android:attr/buttonStyleToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Option 2" />
-    </RadioGroup>
+            android:text="Toggle button" />
 
-    <ToggleButton
-        android:id="@+id/toggle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <RadioGroup
+            android:id="@+id/rdbGp1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@android:style/Widget.Material.ProgressBar.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rdb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option 1" />
 
-    <Button
-        android:id="@+id/btnSet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Potvrdite podešavanja DatePicker!!!" />
+            <RadioButton
+                android:id="@+id/rdb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option 2" />
+        </RadioGroup>
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ToggleButton
+            android:id="@+id/toggle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.Material.ProgressBar.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Potvrdite podešavanja DatePicker!!!" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

@@ -9,6 +9,8 @@ import android.icu.util.Calendar;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,9 +26,25 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void idiNaDruguAktivnost(View v){
-        Intent drugiPage = new Intent(this, SecondActivity.class);
-        startActivity(drugiPage);
+    // Action Bar na Main strani
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.v05:
+                Intent v05 = new Intent(this, SecondActivity.class);
+                this.startActivity(v05);
+                break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void btnSaved_clicked(View view) {
@@ -89,16 +107,18 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
 
-        timePicker = (TimePicker) findViewById(R.id.timePicker);
-        timePicker.setIs24HourView(true);
 
-        datePicker = (DatePicker) findViewById(R.id.datePicker);
-
-        Calendar today = Calendar.getInstance();
-        yr = today.get(Calendar.YEAR);
-        month = today.get(Calendar.MONTH);
-        day = today.get(Calendar.DAY_OF_MONTH);
-        showDialog(DATE_DIALOG_ID);
+        // Ovo je pop-up sa TimePickerom i Kalendarom
+//        timePicker = (TimePicker) findViewById(R.id.timePicker);
+//        timePicker.setIs24HourView(true);
+//
+//        datePicker = (DatePicker) findViewById(R.id.datePicker);
+//
+//        Calendar today = Calendar.getInstance();
+//        yr = today.get(Calendar.YEAR);
+//        month = today.get(Calendar.MONTH);
+//        day = today.get(Calendar.DAY_OF_MONTH);
+//        showDialog(DATE_DIALOG_ID);
 
 
         Button btnOpen = (Button) findViewById(R.id.btnOpen);
@@ -194,5 +214,6 @@ public class MainActivity extends AppCompatActivity {
     private void DisplayToast(String msg) {
         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
 
 }
