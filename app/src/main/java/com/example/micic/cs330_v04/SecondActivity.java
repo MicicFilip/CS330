@@ -33,6 +33,11 @@ import android.widget.ViewSwitcher.ViewFactory;
 public class SecondActivity extends AppCompatActivity implements ViewFactory {
 
 
+    public void theThirdPage(View v){
+        Intent treciPage = new Intent(this, ThirdActivity.class);
+        startActivity(treciPage);
+    }
+
     // Action Bar na Main strani
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +81,9 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
     //---slike za prikazivanje---
     Integer[] imageIDs = {
             R.drawable.pic1,
@@ -91,6 +99,9 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_main);
+
+
+
 
 //        WebView wv = (WebView) findViewById(R.id.webview1);
 //        WebSettings webSettings = wv.getSettings();
@@ -119,6 +130,8 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
 
 
     }
+
+
 
     private class Callback extends WebViewClient {
         @Override
