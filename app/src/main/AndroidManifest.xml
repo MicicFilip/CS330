@@ -17,7 +17,8 @@
         </activity>
 
         <activity android:name=".SecondActivity"/>
-        <activity android:name=".ThirdActivity"/>
+        <activity android:name=".V05Activity"/>
+        <activity android:name=".V06Activity"/>
 
 
 

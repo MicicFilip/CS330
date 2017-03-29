@@ -9,5 +9,9 @@
         android:title="V05"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/v06"
+        android:title="V06"
+        app:showAsAction="always"/>
+
     
 </menu>

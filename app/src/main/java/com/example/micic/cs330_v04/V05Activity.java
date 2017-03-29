@@ -1,7 +1,5 @@
 package com.example.micic.cs330_v04;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +7,6 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,12 +14,12 @@ import android.widget.Toast;
  * Created by Micic on 28-Mar-17.
  */
 
-public class ThirdActivity extends AppCompatActivity {
+public class V05Activity extends AppCompatActivity {
 
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_third, menu);
+//        getMenuInflater().inflate(R.menu.menu_v05, menu);
 //        return true;
 //    }
 //
@@ -44,7 +39,7 @@ public class ThirdActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.third_main);
+        setContentView(R.layout.activity_v05);
 
         ImageView imageTest = (ImageView) findViewById(R.id.imageview1);
         imageTest.setOnCreateContextMenuListener(this);

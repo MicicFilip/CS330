@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
 
@@ -34,7 +32,7 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
 
 
     public void theThirdPage(View v){
-        Intent treciPage = new Intent(this, ThirdActivity.class);
+        Intent treciPage = new Intent(this, V05Activity.class);
         startActivity(treciPage);
     }
 
@@ -98,7 +96,7 @@ public class SecondActivity extends AppCompatActivity implements ViewFactory {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.second_main);
+        setContentView(R.layout.activity_second);
 
 
 
