@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="SQLite baza podataka - primer!" />
+
+    <Button
+        android:id="@+id/addContacts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Dodaj kontakte"
+        android:onClick="addContacts"/>
+
+    <Button
+        android:id="@+id/getContacts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Listaj kontakte"
+        android:onClick="getContacts"/>
+
+    <Button
+        android:id="@+id/getOneContact"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Listaj jedan kontakt"
+        android:onClick="getOneContact"/>
+
+    <Button
+        android:id="@+id/updateContact"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Listaj jedan kontakt"
+        android:onClick="updateContact"/>
+
+
 
 </LinearLayout>
