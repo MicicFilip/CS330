@@ -34,7 +34,7 @@
         android:id="@+id/updateContact"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Listaj jedan kontakt"
+        android:text="Update contacts"
         android:onClick="updateContact"/>
 
 

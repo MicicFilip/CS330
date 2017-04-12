@@ -6,19 +6,7 @@
     tools:context="com.example.micic.cs330_v04.MainActivity">
 
     <item
-        android:id="@+id/v05"
-        android:title="V05"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/v06"
-        android:title="V06"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/v07"
-        android:title="V07"
-        app:showAsAction="always" />
-
-
+        android:id="@+id/back"
+        app:showAsAction="always"
+        android:title="Back" />
 </menu>

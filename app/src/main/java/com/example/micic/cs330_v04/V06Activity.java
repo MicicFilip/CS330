@@ -28,14 +28,15 @@ public class V06Activity extends AppCompatActivity {
 
         final DbAdapter db = new DbAdapter(this);
 
+
         Button addContacts = (Button) findViewById(R.id.addContacts);
         addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 db.open();
-                db.insertContact("filip", "micic@mail.com");
-                db.insertContact("pera", "p@gmail.com");
-                db.insertContact("maja", "m@gmail.com");
+                long id = db.insertContact("filip", "micic@mail.com");
+                id = db.insertContact("pera", "p@gmail.com");
+                id = db.insertContact("maja", "m@gmail.com");
                 db.close();
             }
         });
@@ -86,15 +87,15 @@ public class V06Activity extends AppCompatActivity {
         });
 
         try {
-            String destPath = "/data/data/" + getPackageName() + "/databases";
 
+            String destPath = "/data/data/" + getPackageName() + "/databases";
             System.out.println(destPath);
 
             File f = new File(destPath);
             if (!f.exists()) {
                 f.mkdirs();
                 f.createNewFile();
-                CopyDB(getBaseContext().getAssets().open("database"), new FileOutputStream(destPath + "/Database"));
+                CopyDB(getBaseContext().getAssets().open("cs330db"), new FileOutputStream(destPath + "/Database"));
 
 
             }

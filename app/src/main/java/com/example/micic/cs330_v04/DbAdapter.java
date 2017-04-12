@@ -20,10 +20,10 @@ public class DbAdapter {
     static final String TAG = "DbAdapter";
 
     static final String DATABASE_NAME = "cs330db";
-    static final String DATABASE_TABLE = "user";
+    static final String DATABASE_TABLE = "kontakti";
     static final int DATABASE_VERSION = 3;
 
-    static final String DATABASE_CREATE = "CREATE TABLE user (id integer primary key autoincrement, " + "username text not null, email text not null";
+    static final String DATABASE_CREATE = "CREATE TABLE kontakti (id integer primary key autoincrement, " + "username text not null, email text not null";
 
     final Context context;
     DatabaseHelper DBHelper;
@@ -51,7 +51,7 @@ public class DbAdapter {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "Ažuriranje verzije baze podataka sa " + oldVersion + " na verziju " + newVersion + ", a to će uništiti postojeće podatke");
-            db.execSQL("DROP TABLE IF EXISTS user");
+            db.execSQL("DROP TABLE IF EXISTS kontakti");
             onCreate(db);
         }
     }
