@@ -14,18 +14,18 @@ import android.util.Log;
 
 public class DbAdapter {
 
-    static final String KEY_ROWID = "_id";
-    static final String KEY_NAME = "ime";
+    static final String KEY_ROWID = "id";
+    static final String KEY_NAME = "name";
     static final String KEY_EMAIL = "email";
-    static final String TAG = "DBAdapter";
+    static final String TAG = "DbAdapter";
 
-    static final String DATABASE_NAME = "MyDB";
-    static final String DATABASE_TABLE = "kontakti";
+    static final String DATABASE_NAME = "mydb";
+    static final String DATABASE_TABLE = "contacts";
     static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_CREATE =
-            "create table kontakti (_id integer primary key autoincrement, "
-                    + "ime text not null, email text not null);";
+            "create table contacts (id integer primary key autoincrement, "
+                    + "name text not null, email text not null);";
 
     final Context context;
 
@@ -60,7 +60,7 @@ public class DbAdapter {
         {
             Log.w(TAG, "Ažuriranje verzije baze podataka sa " + oldVersion + " na verziju "
                     + newVersion + ", a to će uništiti postojeće podatke");
-            db.execSQL("DROP TABLE IF EXISTS kontakti");
+            db.execSQL("DROP TABLE IF EXISTS contacts");
             onCreate(db);
         }
     }
@@ -79,10 +79,10 @@ public class DbAdapter {
     }
 
     //---umetanje kontakta u bazu---
-    public long insertContact(String ime, String email)
+    public long insertContact(String name, String email)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_NAME, ime);
+        initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_EMAIL, email);
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
@@ -114,10 +114,10 @@ public class DbAdapter {
     }
 
     //---ažurira kontakt---
-    public boolean updateContact(long rowId, String ime, String email)
+    public boolean updateContact(long rowId, String name, String email)
     {
         ContentValues args = new ContentValues();
-        args.put(KEY_NAME, ime);
+        args.put(KEY_NAME, name);
         args.put(KEY_EMAIL, email);
         return db.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }

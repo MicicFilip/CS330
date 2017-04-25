@@ -40,6 +40,7 @@ public class V06Activity extends AppCompatActivity {
                 long id = db.insertContact("filip", "micic@mail.com");
                 id = db.insertContact("pera", "p@gmail.com");
                 id = db.insertContact("maja", "m@gmail.com");
+                System.out.println(id);
                 db.close();
             }
         });
@@ -92,13 +93,14 @@ public class V06Activity extends AppCompatActivity {
         try {
             String destPath = "/data/data/" + getPackageName() +
                     "/databases";
+            System.out.println(destPath);
             File f = new File(destPath);
             if (!f.exists()) {
                 f.mkdirs();
                 f.createNewFile();
                 //---kopira db iz assets foldera u databases folder---
                 CopyDB(getBaseContext().getAssets().open("mydb"),
-                        new FileOutputStream(destPath + "/MyDB"));
+                        new FileOutputStream(destPath + "/MyDb"));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -107,15 +109,15 @@ public class V06Activity extends AppCompatActivity {
         }
 
         //---preuzimanje svih kontakata---
-        db.open();
-        Cursor c = db.getAllContacts();
-        if (c.moveToFirst())
-        {
-            do {
-                DisplayContact(c);
-            } while (c.moveToNext());
-        }
-        db.close();
+//        db.open();
+//        Cursor c = db.getAllContacts();
+//        if (c.moveToFirst())
+//        {
+//            do {
+//                DisplayContact(c);
+//            } while (c.moveToNext());
+//        }
+//        db.close();
     }
 
     @Override
