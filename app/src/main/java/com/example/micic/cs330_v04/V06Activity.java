@@ -1,9 +1,12 @@
 package com.example.micic.cs330_v04;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -87,23 +90,50 @@ public class V06Activity extends AppCompatActivity {
         });
 
         try {
-
-            String destPath = "/data/data/" + getPackageName() + "/databases";
-            System.out.println(destPath);
-
+            String destPath = "/data/data/" + getPackageName() +
+                    "/databases";
             File f = new File(destPath);
             if (!f.exists()) {
                 f.mkdirs();
                 f.createNewFile();
-                CopyDB(getBaseContext().getAssets().open("cs330db"), new FileOutputStream(destPath + "/Database"));
-
-
+                //---kopira db iz assets foldera u databases folder---
+                CopyDB(getBaseContext().getAssets().open("mydb"),
+                        new FileOutputStream(destPath + "/MyDB"));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //---preuzimanje svih kontakata---
+        db.open();
+        Cursor c = db.getAllContacts();
+        if (c.moveToFirst())
+        {
+            do {
+                DisplayContact(c);
+            } while (c.moveToNext());
+        }
+        db.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_v06, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.back:
+                Intent back = new Intent(this, MainActivity.class);
+                this.startActivity(back);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {

@@ -1,5 +1,6 @@
 package com.example.micic.cs330_v04;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -52,6 +55,8 @@ public class V05Activity extends AppCompatActivity {
         });
 
     }
+
+
 
 
     private void DisplayToast(String msg) {
