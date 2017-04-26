@@ -6,7 +6,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.v07:
                 Intent v07 = new Intent(this, V07Activity.class);
                 this.startActivity(v07);
+                break;
+            case R.id.v08:
+                Intent v08 = new Intent(this, V08Activity.class);
+                this.startActivity(v08);
                 break;
 
 
@@ -202,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private TimePickerDialog.OnTimeSetListener mTimeListener = new TimePickerDialog.OnTimeSetListener() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour) {
             hour = hourOfDay;

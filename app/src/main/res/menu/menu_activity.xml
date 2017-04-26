@@ -20,5 +20,10 @@
         android:title="V07"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/v08"
+        android:title="V08"
+        app:showAsAction="always" />
+
 
 </menu>
