@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+
+
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,7 +52,7 @@ public class V08Activity extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
 
-       // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
     }
 
@@ -55,9 +60,9 @@ public class V08Activity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        LatLng kg = new LatLng(44.017, 20.917);
-        mMap.addMarker(new MarkerOptions().position(kg).title("Marker u Kragujevcu"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kg));
+        LatLng slavija = new LatLng(44.7978486, 20.4715685);
+        mMap.addMarker(new MarkerOptions().position(slavija).title("Marker Slavija"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(slavija));
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -97,7 +102,7 @@ public class V08Activity extends FragmentActivity implements OnMapReadyCallback 
 
         try {
             List<Address> adr;
-            adr = gk.getFromLocation(kg.latitude, kg.longitude, 1);
+            adr = gk.getFromLocation(slavija.latitude, slavija.longitude, 1);
             String ad = "";
             if (adr.size() > 0) {
                 for (int i = 0; i < adr.get(0).getMaxAddressLineIndex(); i++)
@@ -109,15 +114,23 @@ public class V08Activity extends FragmentActivity implements OnMapReadyCallback 
         }
     }
 
-    // Nastavi da radis ovde
+    @Override
+    public void onStart() {
+        super.onStart();
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        client.connect();
-//
-//        Action viewAction = Action.
-//    }
+        client.connect();
+        Action viewAction = Action.newAction(Action.TYPE_VIEW, "Maps Page", Uri.parse("http://host/path"), Uri.parse("android-app://com.example.micic.cs330_v04/http/host/path"));
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        Action viewAction = Action.newAction(Action.TYPE_VIEW, "Maps Page", Uri.parse("http://host/path"), Uri.parse("android-app://com.example.micic.cs330_v04/http/host/path"));
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
