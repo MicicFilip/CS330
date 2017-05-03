@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent v08 = new Intent(this, V08Activity.class);
                 this.startActivity(v08);
                 break;
+            case R.id.v09:
+                Intent v09 = new Intent(this, V09Activity.class);
+                this.startActivity(v09);
+                break;
 
 
         }

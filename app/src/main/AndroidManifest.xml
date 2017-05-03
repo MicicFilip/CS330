@@ -21,6 +21,7 @@
         <activity android:name=".V06Activity" />
         <activity android:name=".V07Activity" />
         <activity android:name=".V08Activity" />
+        <activity android:name=".V09Activity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
