@@ -22,13 +22,18 @@
         <activity android:name=".V07Activity" />
         <activity android:name=".V08Activity" />
         <activity android:name=".V09Activity" />
+        <activity android:name=".SmsActivity" />
+        <activity android:name=".Mp3Activity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDBgoopapcid5Yx0pe5SA67kmqU5tF0QMQ" />
 
-
+        <service android:enabled="true" android:name="util.Mp3Player" />
     </application>
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

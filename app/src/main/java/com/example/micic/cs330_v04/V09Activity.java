@@ -3,17 +3,24 @@ package com.example.micic.cs330_v04;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 
 import org.apache.http.HttpEntity;
@@ -32,10 +39,13 @@ import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.UnknownHostException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+import util.CommsThread;
 
 /**
  * Created by Micic on 03-May-17.
@@ -43,131 +53,104 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class V09Activity extends AppCompatActivity {
 
+    static final String NICKNAME = "Student1";
+    InetAddress serverAddress;
+    Socket socket;
+    static TextView txtMessagesReceived;
+    EditText txtMessage;
+    CommsThread commsThread;
+
+    public static Handler UIupdater = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            int numOfBytesReceived = msg.arg1;
+            byte[] buffer = (byte[]) msg.obj;
+//---prevođenje byte niza u string---
+            String strReceived = new String(buffer);
+//---pruzimanje aktuelnog stringa---
+            strReceived = strReceived.substring(
+                    0, numOfBytesReceived);
+//---prikazivanje primljenog teksta u TextView---
+            txtMessagesReceived.setText(
+                    txtMessagesReceived.getText().toString() +
+                            strReceived);
+        }
+    };
+
+    private class CreateCommThreadTask extends AsyncTask
+            <Void, Integer, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+//---kreiranje soketa---
+                serverAddress =
+                        InetAddress.getByName("192.168.1.101");
+                socket = new Socket(serverAddress, 500);
+                commsThread = new CommsThread(socket);
+                commsThread.start();
+//---prijavljivanje korisnika; šalje nadimak---
+                sendToServer(NICKNAME);
+            } catch (UnknownHostException e) {
+                Log.d("Sockets", e.getLocalizedMessage());
+            } catch (IOException e) {
+                Log.d("Sockets", e.getLocalizedMessage());
+            }
+            return null;
+        }
+    }
+
+    private class WriteToServerTask extends AsyncTask
+            <byte[], Void, Void> {
+        protected Void doInBackground(byte[]...data) {
+            commsThread.write(data[0]);
+            return null;
+        }
+    }
+
+    private class CloseSocketTask extends AsyncTask
+            <Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                Log.d("Sockets", e.getLocalizedMessage());
+            }
+            return null;
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_v09);
 
-        new AccessWebServiceTask().execute("Belgrade");
-        new ReadJSONFeedTask().execute("https://restcountries.eu" + "/rest/" + "v2/" + "name/" + "serbia");
 
+        txtMessage = (EditText) findViewById(R.id.txtMessage);
+        txtMessagesReceived = (TextView)
+                findViewById(R.id.txtMessagesReceived);
     }
 
-    private class AccessWebServiceTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... urls) {
-            return WordDefinition(urls[0]);
-        }
 
-        protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
-        }
+    public void onClickSend(View view) {
+//---prosleđivanje poruke na server---
+        sendToServer(txtMessage.getText().toString());
+    }
+    private void sendToServer(String message) {
+        byte[] theByteArray =
+                message.getBytes();
+        new WriteToServerTask().execute(theByteArray);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        new CreateCommThreadTask().execute();
     }
 
-    private String WordDefinition(String word) {
-        InputStream in = null;
-        String strDefinition = "";
-
-
-        try {
-            URL url = new URL("http://services.aonaware.com/DictService/" + "DictService.asmx/Define?word=" + word);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            //in = OpenHttpConnection("http://services.aonaware.com/DictService/" + "DictService.asmx/Define?word=" + word);
-            in = new BufferedInputStream(urlConnection.getInputStream());
-
-            Document doc = null;
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db;
-            try {
-                db = dbf.newDocumentBuilder();
-                doc = db.parse(in);
-            } catch (ParserConfigurationException e) {
-
-                e.printStackTrace();
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-            doc.getDocumentElement().normalize();
-
-            NodeList definitionElements =
-                    doc.getElementsByTagName("Definition");
-            for (int i = 0; i < definitionElements.getLength(); i++) {
-                Node itemNode = definitionElements.item(i);
-                if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element definitionElement = (Element) itemNode;
-                    NodeList wordDefinitionElements = (definitionElement).getElementsByTagName("WordDefinition");
-                    strDefinition = "";
-
-                    for (int j = 0; j < wordDefinitionElements.getLength(); j++) {
-
-                        Element wordDefinitionElement =
-                                (Element) wordDefinitionElements.item(j);
-                        NodeList textNodes = ((Node) wordDefinitionElement).getChildNodes();
-                        strDefinition += ((Node) textNodes.item(0)).getNodeValue() + ". \n";
-                    }
-                }
-            }
-        } catch (IOException e1) {
-            Log.d("NetworkingActivity", e1.getLocalizedMessage());
-        }
-//---vraćanje definicije reči---
-        return strDefinition;
-    }
-
-    // JSON
-
-    public String readJSONFeed(String URL) {
-        StringBuilder stringBuilder = new StringBuilder();
-        HttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(URL);
-        try {
-            HttpResponse response = client.execute(httpGet);
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) {
-                HttpEntity entity = response.getEntity();
-                InputStream content = entity.getContent();
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(content));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-            } else {
-                Log.e("JSON", "Neuspešno učitavanje datoteke");
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
-    }
-
-    private class ReadJSONFeedTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... urls) {
-            return readJSONFeed(urls[0]);
-        }
-
-        protected void onPostExecute(String result) {
-            try {
-                JSONArray jsonArray = new JSONArray(result);
-                Log.i("JSON", "Broj nizova u toku: " +
-                        jsonArray.length());
-//---Prikazuje sadržaj JSON toka---
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    Toast.makeText(getBaseContext(), jsonObject.getString("appeId")
-                                    +
-                                    " - " + jsonObject.getString("inputTime"),
-                            Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        new CloseSocketTask().execute();
     }
 
     @Override

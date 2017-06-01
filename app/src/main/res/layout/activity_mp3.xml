@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/metro">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Mp3 Demo - primer!!!" />
+    <Button
+        android:id="@+id/btnStartMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startMusic"
+        android:text="Start" />
+    <Button
+        android:id="@+id/btnStopMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopMusic"
+        android:text="Stop" />
+
+</LinearLayout>

@@ -58,8 +58,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.v09:
                 Intent v09 = new Intent(this, V09Activity.class);
                 this.startActivity(v09);
+            case R.id.sms:
+                Intent sms = new Intent(this, SmsActivity.class);
+                this.startActivity(sms);
                 break;
-
+            case R.id.mp3:
+                Intent mp3 = new Intent(this, Mp3Activity.class);
+                this.startActivity(mp3);
+                break;
 
         }
         return super.onOptionsItemSelected(item);
