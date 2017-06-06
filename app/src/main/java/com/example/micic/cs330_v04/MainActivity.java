@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent mp3 = new Intent(this, Mp3Activity.class);
                 this.startActivity(mp3);
                 break;
+            case R.id.notification:
+                Intent not = new Intent(this, NotificationMainActivity.class);
+                this.startActivity(not);
+                break;
 
         }
         return super.onOptionsItemSelected(item);

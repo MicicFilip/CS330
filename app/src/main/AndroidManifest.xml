@@ -24,7 +24,8 @@
         <activity android:name=".V09Activity" />
         <activity android:name=".SmsActivity" />
         <activity android:name=".Mp3Activity" />
-
+        <activity android:name=".NotificationMainActivity" />
+        <activity android:name=".ActiveNotificationActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDBgoopapcid5Yx0pe5SA67kmqU5tF0QMQ" />

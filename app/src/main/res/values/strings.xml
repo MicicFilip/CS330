@@ -1,3 +1,19 @@
 <resources>
+    <string name="intro_message">
+        <![CDATA[
+
+
+The NotificationManager can tell you how many notifications your application is currently showing.
+This sample demonstrates how to use this API that has been introduced with Android M.
+To get started, press the "add a notification" button.
+When a notification is being canceled, the count gets updated via a PendingIntent.
+
+
+        ]]>
+    </string>
     <string name="app_name">CS330-V04</string>
+    <string name="add_a_notification">Add a notification</string>
+    <string name="active_notifications">Active Notifications: %1$s</string>
+    <string name="update_notification_count">Update count</string>
+    <string name="sample_notification_content">This is a sample notification.</string>
 </resources>

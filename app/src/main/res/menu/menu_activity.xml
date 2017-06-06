@@ -40,5 +40,10 @@
         android:title="MP3"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/notification"
+        android:title="Not"
+        app:showAsAction="always" />
+
 
 </menu>
